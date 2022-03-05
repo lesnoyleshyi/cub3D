@@ -26,6 +26,7 @@ int		up_atoi(const char *str);
 int		get_index(const char *str, char delimiter);
 int		check_side(const char *line);
 int		check_surface(const char *line);
+void	parse(int argc, char **argv);
 void	put_error_and_arg(char *arg, char *message, int error_status);
 void	put_error(const char *message, int error_status);
 void	validation_check_path(char *path);

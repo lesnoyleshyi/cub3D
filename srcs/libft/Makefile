@@ -28,7 +28,7 @@ ${NAME}	:	${OBJ}
 			ar rcs ${NAME} $?
 
 %.o		:	%.c libft.h
-			gcc -c -Werror -Wall -Wextra $< -o $@
+			cc -c -Werror -Wall -Wextra $< -o $@
 
 clean	:
 			rm -f ${OBJ}

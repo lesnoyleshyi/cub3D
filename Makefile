@@ -1,34 +1,36 @@
-NAME	=	cub3D
+NAME		=	cub3D
 
-SRC_DIR	=	./srcs/
+SRC_DIR		=	./srcs/
 
-LIBFT	=	./srcs/libft/libft.a
+LIBFT		=	./srcs/libft/libft.a
 
-HEADER	=	$(addprefix ./includes, constants.h cub.h strings.h structs.h)
+CC			=	cc
 
-FILES	=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.c	\
+CFLAGS		=	-Wall -Werror -Wextra
+
+HEADER		=	$(addprefix ./includes, constants.h cub.h strings.h structs.h)
+
+FILES		=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.c	\
 						convert_line_to_map.c create_data.c create_map.c get_index.c 	\
 						get_subline.c parse.c put_error.c read_file.c up_atoi.c			\
 						validation_check.c )
 
-SRCS	=	main.c \
-			$(addprefix ${SRC_DIR}, ${FILES})
+SRCS		=	$(addprefix ${SRC_DIR}, xlam.c main.c ${FILES})
 
-OBJS	=	${SRCS:.c=.o}
+OBJS		=	${SRCS:.c=.o}
 
-CC		=	cc
+.PHONY		:	re clean fclean test libft
 
-CFLAGS	=	-Wall -Werror -Wextra
-
-.PHONY		:	re, clean, fclean, test, libft
-
-%.o			:	%.c	${HEADER}
-				${CC} ${CFLAGS} -c $< -o $@
+test		:
+				echo ${SRCS}
 
 all			:	${NAME}
 
-${NAME}		:	${OBJS} ${LIBFT}
+${NAME}		:	${LIBFT} ${OBJS}
 				${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
+
+%.o			:	%.c ${HEADER}
+				${CC} ${CFLAGS} -c $< -o $@
 
 ${LIBFT}	:	libft ;
 
@@ -42,3 +44,5 @@ clean		:
 fclean		:	clean
 				rm -rf ${NAME}
 				${MAKE} -C ./srcs/libft fclean
+
+re			:	fclean all

@@ -1,3 +1,5 @@
+#include "../includes/cub.h"
+
 void	print_string_array(char **arr)
 {
 	while (*arr)

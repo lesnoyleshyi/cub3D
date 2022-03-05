@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "../../includes/cub.h"
 
 static void	choice_side_and_set_path(const char *line, t_data *data)
 {
@@ -71,6 +71,9 @@ static void	choice_side_and_set_color(char *line, t_data *data)
 	color->g = up_atoi(&str[i + 1]);
 	i += get_index(&str[i + 1], COMMA) + 1;
 	color->b = up_atoi(&str[i + 1]);
+	i += get_index(&str[i + 1], COMMA) + 1;
+	if (str[i] != END_OF_LINE)
+		put_error(INVALID_COLOR_CHANNELS, ERR_COLOR_CHANNELS);
 	validation_check_color(color);
 	i = check_surface(line);
 	if (i == E_FLOOR && data->floor == NULL)
