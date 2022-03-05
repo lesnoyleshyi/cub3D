@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_subline.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2022/03/05 06:08:15 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/05 06:08:17 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int main(int argc, char **argv)
+char	*get_subline(const char *line)
 {
-	parse(argc, argv);
-	return 0;
+	int		i;
+	char	*subline;
+
+	while (*line == SPACE)
+		++line;
+	if (*line == END_OF_LINE)
+		put_error(INVALID_LINE, ERR_LINE);
+	i = 0;
+	while (line[i] != END_OF_LINE && line[i] != NEW_LINE)
+		++i;
+	subline = ft_substr(line, 0, i);
+	if (subline == NULL)
+		put_error(INVALID_MEMORY, ERR_MEMORY);
+	return (subline);
 }

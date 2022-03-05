@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2022/03/05 06:08:25 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/05 06:08:27 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int main(int argc, char **argv)
+void	parse(int argc, char **argv)
 {
-	parse(argc, argv);
-	return 0;
+	char	*str;
+	t_data	*data;
+
+	if (argc != 2)
+		put_error(INVALID_ARG_COUNT, ERR_ARG);
+	str = read_file(argv[1]);
+	data = convert_line_to_data(str);
+	print_data(data);
 }

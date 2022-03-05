@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:22:35 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:22:37 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strdup(const char *s1)
 {
-	parse(argc, argv);
-	return 0;
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	str = (char *) malloc((i + 1) * sizeof(char));
+	if (!str)
+		return (str);
+	while (i > 0)
+	{
+		str[i] = s1[i];
+		i--;
+	}
+	str[i] = s1[i];
+	return (str);
 }

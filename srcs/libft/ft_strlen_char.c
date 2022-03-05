@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/11/21 16:01:59 by drayl             #+#    #+#             */
+/*   Updated: 2021/11/21 16:02:22 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
-
-int main(int argc, char **argv)
+int	ft_strlen_char(const char *str, char c)
 {
-	parse(argc, argv);
-	return 0;
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
 }

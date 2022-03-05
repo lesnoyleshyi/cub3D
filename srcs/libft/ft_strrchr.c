@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:24:42 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:24:44 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strrchr(const char *str, int a)
 {
-	parse(argc, argv);
-	return 0;
+	char	*c;
+	char	*s;
+
+	c = (char *)str;
+	s = (char *)(void *)0;
+	while (*c)
+	{
+		if (*c == (unsigned char)a)
+			s = c;
+		c++;
+	}
+	if ((unsigned char)a == '\0')
+		s = c;
+	return (s);
 }

@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:19:41 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:19:43 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int main(int argc, char **argv)
+t_list	*ft_lstnew(int content)
 {
-	parse(argc, argv);
-	return 0;
+	t_list	*new_element;
+
+	new_element = (t_list *) malloc(sizeof(t_list));
+	if (!new_element)
+		return (new_element);
+	new_element->value = content;
+	new_element->pot = 0;
+	new_element->bool = 0;
+	new_element->lst_size = 1;
+	new_element->sort_lst = NULL;
+	new_element->next = NULL;
+	new_element->back = NULL;
+	return (new_element);
 }

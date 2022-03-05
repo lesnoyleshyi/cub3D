@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:20:45 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:20:47 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	*ft_memcpy(void *s1, const void *s2, size_t n)
 {
-	parse(argc, argv);
-	return 0;
+	void	*s;
+
+	if (!s1 && !s2)
+		return (s1);
+	s = s1;
+	while ((n > 0))
+	{
+		*(char *)s1 = *(char *)s2;
+		s1++;
+		s2++;
+		n--;
+	}
+	return (s);
 }

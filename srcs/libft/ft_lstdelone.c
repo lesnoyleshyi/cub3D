@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:17:35 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:17:38 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_lstdelone(t_list *lst)
 {
-	parse(argc, argv);
-	return 0;
+	lst->back->next = lst->next;
+	lst->next->back = lst->back;
+	free(lst);
+	lst = NULL;
 }

@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:21:03 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:21:05 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	*ft_memset(void *str, int c, size_t n)
 {
-	parse(argc, argv);
-	return 0;
+	char	*s;
+
+	s = str;
+	while (n > 0)
+	{
+		*s = (char)c;
+		s++;
+		n--;
+	}
+	return (str);
 }

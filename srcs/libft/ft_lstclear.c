@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:17:13 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:17:18 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include <stdlib.h>
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_lstclear(t_list **lst)
 {
-	parse(argc, argv);
-	return 0;
+	t_list	*buff;
+
+	while (*lst)
+	{
+		buff = (*lst)->next;
+		free(*lst);
+		(*lst) = buff;
+	}
+	*lst = NULL;
 }

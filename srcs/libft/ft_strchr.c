@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:22:23 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:22:27 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+char	*ft_strchr(const char *str, int a)
 {
-	parse(argc, argv);
-	return 0;
+	char	*s;
+
+	s = (char *)str;
+	while (*s && *s != (unsigned char)a)
+		s++;
+	if (*s == '\0' && a != '\0')
+		return ((void *)0);
+	return (s);
 }

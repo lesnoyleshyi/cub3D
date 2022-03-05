@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:20:54 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:20:55 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	*ft_memmove(void *s1, const void *s2, size_t n)
 {
-	parse(argc, argv);
-	return 0;
+	void	*s;
+
+	s = s1;
+	if (s1 <= s2)
+	{
+		while (s2 && n-- > 0)
+			*(char *)s1++ = *(char *)s2++;
+	}
+	else
+	{
+		while (n-- > 0)
+			((char *)s1)[n] = ((char *)s2)[n];
+	}
+	return (s);
 }

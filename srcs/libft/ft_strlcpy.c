@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:23:27 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:23:31 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+size_t	ft_strlcpy(char *str1, const char *str2, size_t len)
 {
-	parse(argc, argv);
-	return 0;
+	size_t	n;
+
+	n = 0;
+	if (len > 0)
+	{
+		while (*str2 && len > 1)
+		{
+			*str1++ = *str2++;
+			n++;
+			len--;
+		}
+		*str1 = '\0';
+	}
+	while (*str2)
+	{
+		str2++;
+		n++;
+	}
+	return (n);
 }

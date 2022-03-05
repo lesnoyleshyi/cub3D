@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:21:43 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:21:46 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include <unistd.h>
+#include "libft.h"
 
-int main(int argc, char **argv)
+static void	rec(int n, int fd)
 {
-	parse(argc, argv);
-	return 0;
+	char	c;
+
+	if (n > 9 || n < -9)
+		rec(n / 10, fd);
+	c = (char)(((n % 10) * ((n > 0) * 2 - 1)) + '0');
+	write(fd, &c, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	if (n < 0)
+		write(fd, "-", 1);
+	rec(n, fd);
 }

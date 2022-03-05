@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:16:31 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:16:43 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	parse(argc, argv);
-	return 0;
+	if (!lst || !*lst)
+		*lst = new;
+	else if (!(*lst)->back)
+	{
+		(*lst)->back = new;
+		(*lst)->next = new;
+		new->next = *lst;
+		new->back = *lst;
+	}
+	else
+	{
+		new->next = *lst;
+		new->back = (*lst)->back;
+		(*lst)->back->next = new;
+		(*lst)->back = new;
+	}
 }

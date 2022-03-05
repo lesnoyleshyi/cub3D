@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   create_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2022/03/05 06:07:47 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/05 06:07:49 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int main(int argc, char **argv)
+t_data	*create_data(void)
 {
-	parse(argc, argv);
-	return 0;
+	t_data	*data;
+
+	data = (t_data *) malloc(sizeof (t_data));
+	if (data == NULL)
+		put_error(INVALID_MEMORY, ERR_MEMORY);
+	data->path_north = NULL;
+	data->path_south = NULL;
+	data->path_west = NULL;
+	data->path_east = NULL;
+	data->floor = NULL;
+	data->ceilling = NULL;
+	return (data);
 }

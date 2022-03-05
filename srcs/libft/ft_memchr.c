@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/13 23:19:58 by drayl             #+#    #+#             */
+/*   Updated: 2021/10/13 23:20:04 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub.h"
+#include "libft.h"
 
-int main(int argc, char **argv)
+void	*ft_memchr(const void *str, int s, size_t n)
 {
-	parse(argc, argv);
-	return 0;
+	void	*result;
+
+	result = (void *)0;
+	while (n > 0)
+	{
+		if (*(char *)str == (char)s)
+		{
+			result = (void *)str;
+			break ;
+		}
+		str++;
+		n--;
+	}
+	return (result);
 }

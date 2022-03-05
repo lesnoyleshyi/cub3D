@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_index.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 06:25:54 by drayl             #+#    #+#             */
-/*   Updated: 2022/03/05 06:25:57 by drayl            ###   ########.fr       */
+/*   Created: 2022/03/05 06:08:07 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/05 06:08:09 by drayl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub.h"
 
-int main(int argc, char **argv)
+int	get_index(const char *str, char delimiter)
 {
-	parse(argc, argv);
-	return 0;
+	int	i;
+
+	i = 0;
+	while (str[i] != END_OF_LINE && str[i] != delimiter)
+		++i;
+	return (i);
 }
