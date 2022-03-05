@@ -16,6 +16,7 @@
 # include "constants.h"
 # include "strings.h"
 # include "structs.h"
+# include "../mlx/mlx.h"
 # include <sys/fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>

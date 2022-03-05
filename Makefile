@@ -21,13 +21,10 @@ OBJS		=	${SRCS:.c=.o}
 
 .PHONY		:	re clean fclean test libft
 
-test		:
-				echo ${SRCS}
-
 all			:	${NAME}
 
 ${NAME}		:	${LIBFT} ${OBJS}
-				${CC} ${CFLAGS} ${OBJS} ${LIBFT} -o ${NAME}
+				${CC} ${CFLAGS} -L ./srcs/mlx -l mlx -framework OpenGL -framework AppKit ${OBJS} ${LIBFT} -o ${NAME}
 
 %.o			:	%.c ${HEADER}
 				${CC} ${CFLAGS} -c $< -o $@
