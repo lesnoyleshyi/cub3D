@@ -76,12 +76,15 @@ typedef struct s_texture
 
 typedef struct s_game_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_tex	*texture;
 	int 	f_color;
 	int 	c_color;
 	char	**map;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_tex	*texture;
+	t_coord	player;
+	t_coord	vector;
+	t_coord	plane;
 }	t_game;
 
 #endif

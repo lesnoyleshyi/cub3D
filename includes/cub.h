@@ -40,6 +40,9 @@ t_data	*create_data(void);
 t_data	*convert_line_to_data(char *line);
 t_data	*parse(int argc, char **argv);
 
+//   --- game/utils.c ---   //
+double	abs(double n);
+
 //   --- mlx_utils ---   //
 void	init_mlx(t_game *game, t_data *data);
 
