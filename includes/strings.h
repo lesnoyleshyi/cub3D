@@ -44,4 +44,7 @@
 # define INVALID_PLAYER "There is no player on the map"
 # define INVALID_MAP "map is not closed"
 # define INVALID_SYMBOL "unidentified symbol in the map"
+# define INVALID_MLX_PTR "mlx pointer initialization error"
+# define INVALID_INIT_IMG "texture error"
+
 #endif

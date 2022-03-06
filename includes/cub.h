@@ -16,7 +16,7 @@
 # include "constants.h"
 # include "strings.h"
 # include "structs.h"
-# include "../mlx/mlx.h"
+# include "../srcs/mlx/mlx.h"
 # include <sys/fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -27,7 +27,6 @@ int		up_atoi(const char *str);
 int		get_index(const char *str, char delimiter);
 int		check_side(const char *line);
 int		check_surface(const char *line);
-void	parse(int argc, char **argv);
 void	put_error_and_arg(char *arg, char *message, int error_status);
 void	put_error(const char *message, int error_status);
 void	validation_check_path(char *path);
@@ -39,6 +38,15 @@ t_map	*create_map(void);
 t_map	*convert_line_to_map(char *line);
 t_data	*create_data(void);
 t_data	*convert_line_to_data(char *line);
+t_data	*parse(int argc, char **argv);
+
+//   --- mlx_utils ---   //
+void	init_mlx(t_game *game, t_data *data);
+
+//   --- game ---   //
+t_game	*init_game(t_data *data);
+int		execute_action(int key, t_game *game);
+int		exit_ok(int key);
 
 //   --- xlam.c ---   //
 void	print_string_array(char **arr);

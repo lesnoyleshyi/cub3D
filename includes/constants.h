@@ -25,6 +25,7 @@
 # define MIN_WIDTH 3
 # define MIN_HEIGHT 3
 
+# define OK 0
 # define ERR_ARG 1
 # define ERR_PERMISSION 2
 # define ERR_FILE 3
@@ -45,6 +46,8 @@
 # define ERR_PLAYER 18
 # define ERR_MAP 19
 # define ERR_SYMBOL 20
+# define ERR_MLX 21
+# define ERR_INIT_IMG 22
 
 # define END_OF_LINE '\0'
 # define NEW_LINE '\n'
@@ -57,6 +60,18 @@
 # define SIDE_W 'W'
 # define SIDE_E 'E'
 
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
 
+
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_W 13
+# define KEY_ESC 53
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
 
 #endif

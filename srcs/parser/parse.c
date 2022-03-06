@@ -12,7 +12,7 @@
 
 #include "../../includes/cub.h"
 
-void	parse(int argc, char **argv)
+t_data	*parse(int argc, char **argv)
 {
 	char	*str;
 	t_data	*data;
@@ -21,5 +21,6 @@ void	parse(int argc, char **argv)
 		put_error(INVALID_ARG_COUNT, ERR_ARG);
 	str = read_file(argv[1]);
 	data = convert_line_to_data(str);
-	print_data(data);
+	free(str);
+	return (data);
 }

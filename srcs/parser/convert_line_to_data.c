@@ -118,6 +118,5 @@ t_data	*convert_line_to_data(char *line)
 	i = convert_texture(line, data);
 	i += convert_color(&line[i], data);
 	data->map = convert_line_to_map(&line[i]);
-	free(line);
 	return (data);
 }

@@ -14,6 +14,16 @@
 
 int	main(int argc, char **argv)
 {
-	parse(argc, argv);
+	t_data	*data;
+	t_game	*game;
+
+
+	data = parse(argc, argv);
+	print_data(data);
+	game = init_game(data);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->texture->img, 0, 0);
+	mlx_hook(game->win_ptr, 2, 0, execute_action, game);
+	mlx_hook(game->win_ptr, 17, 0, exit_ok, NULL);
+	mlx_loop(game->mlx_ptr);
 	return (0);
 }

@@ -15,10 +15,10 @@
 
 enum e_side
 {
-	E_NORTH,
-	E_SOUTH,
-	E_WEST,
-	E_EAST
+	E_NORTH = 0,
+	E_SOUTH = 1,
+	E_WEST = 2,
+	E_EAST = 3
 };
 
 enum e_surface
@@ -26,6 +26,8 @@ enum e_surface
 	E_FLOOR,
 	E_CEILLING
 };
+
+typedef int t_bool;
 
 typedef struct s_color
 {
@@ -44,7 +46,7 @@ typedef struct s_map_data
 	char	**map;
 }	t_map;
 
-typedef struct s_game_data
+typedef struct s_file_data
 {
 	char	*path_north;
 	char	*path_south;
@@ -54,5 +56,32 @@ typedef struct s_game_data
 	t_color	*floor;
 	t_color	*ceilling;
 }	t_data;
+
+typedef struct s_coordination
+{
+	double	x;
+	double	y;
+}	t_coord;
+
+typedef struct s_texture
+{
+	void	*img;
+	char	*adr;
+	int		width;
+	int		height;
+	int 	endian;
+	int 	size;
+	int		bpp;
+}	t_tex;
+
+typedef struct s_game_data
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_tex	*texture;
+	int 	f_color;
+	int 	c_color;
+	char	**map;
+}	t_game;
 
 #endif
