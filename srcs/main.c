@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	data = parse(argc, argv);
 	print_data(data);
 	game = init_game(data);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->texture->img, 0, 0);
+	mlx_loop_hook(game->mlx_ptr, recasting, game);
 	mlx_hook(game->win_ptr, 2, 0, execute_action, game);
 	mlx_hook(game->win_ptr, 17, 0, exit_ok, NULL);
 	mlx_loop(game->mlx_ptr);

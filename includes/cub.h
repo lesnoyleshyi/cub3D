@@ -40,16 +40,19 @@ t_data	*create_data(void);
 t_data	*convert_line_to_data(char *line);
 t_data	*parse(int argc, char **argv);
 
-//   --- game/utils.c ---   //
-double	abs(double n);
-
 //   --- mlx_utils ---   //
 void	init_mlx(t_game *game, t_data *data);
+int		get_pixel_color(t_tex *tex, double x0, double y0);
+void	put_pixel(t_tex *img, int x, int y, int color);
+
+//   --- game/utils.c ---   //
+double	up_abs(double n);
 
 //   --- game ---   //
 t_game	*init_game(t_data *data);
 int		execute_action(int key, t_game *game);
 int		exit_ok(int key);
+int		recasting(t_game *game);
 
 //   --- xlam.c ---   //
 void	print_string_array(char **arr);
