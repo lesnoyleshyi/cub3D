@@ -10,7 +10,7 @@ static void	file_to_img(t_tex *tex, void *mlx, char *path)
 static void get_addr(t_tex *tex)
 {
 	tex->adr = mlx_get_data_addr(tex->img, &tex->bpp,
-								&tex->size, &tex->endian);
+								&tex->len, &tex->endian);
 	if (tex->adr == NULL)
 		put_error(INVALID_INIT_IMG, ERR_INIT_IMG);
 }

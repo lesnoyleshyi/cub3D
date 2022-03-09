@@ -70,9 +70,11 @@ typedef struct s_texture
 	int		width;
 	int		height;
 	int 	endian;
-	int 	size;
+	int 	len;
 	int		bpp;
 }	t_tex;
+
+
 
 typedef struct s_game_data
 {
@@ -82,9 +84,10 @@ typedef struct s_game_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_tex	*texture;
+	t_tex	*screen;
 	t_coord	player;
-	t_coord	vector;
 	t_coord	plane;
+	t_coord	dir;
 }	t_game;
 
 #endif
