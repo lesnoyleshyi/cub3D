@@ -4,7 +4,7 @@ static void extract_data_from_map(t_game *game, t_map *map)
 {
 	char	sym;
 
-	sym = map->player_side
+	sym = map->player_side;
 	game->map = map->map;
 	game->player.x = (double) map->player_x + 0.5;
 	game->player.y = (double) map->player_y + 0.5;

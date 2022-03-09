@@ -85,10 +85,10 @@ unsigned char mipng_defilter_paeth(unsigned char *buff, int pos, int a, int b, i
   int	result;
 
   p = a + b - c;
-  if (abs(b - c) <= abs(a - c) && abs(b - c) <= abs(a + b - c - c))
+  if (ft_abs(b - c) <= ft_abs(a - c) && ft_abs(b - c) <= ft_abs(a + b - c - c))
     result = a;
   else
-    if (abs(a - c) <= abs(a + b - c - c))
+    if (ft_abs(a - c) <= ft_abs(a + b - c - c))
       result = b;
     else
       result = c;

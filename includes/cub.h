@@ -13,10 +13,11 @@
 #ifndef CUB_H
 # define CUB_H
 # include "../srcs/libft/libft.h"
+//# include "../srcs/mlx/mlx_macOS/mlx.h"
+# include "../srcs/mlx/minilibx-linux/mlx.h"
 # include "constants.h"
 # include "strings.h"
 # include "structs.h"
-# include "../srcs/mlx/mlx.h"
 # include <sys/fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -41,7 +42,7 @@ t_data	*convert_line_to_data(char *line);
 t_data	*parse(int argc, char **argv);
 
 //   --- game/utils.c ---   //
-double	abs(double n);
+double	ft_abs(double n);
 
 //   --- mlx_utils ---   //
 void	init_mlx(t_game *game, t_data *data);

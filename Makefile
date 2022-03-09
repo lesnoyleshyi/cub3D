@@ -1,8 +1,8 @@
 NAME		=	cub3D
 
-SRC_DIR		=	./srcs/
+SRC_DIR		=	./srcs
 
-LIBFT		=	./srcs/libft/libft.a
+LIBFT		=	${SRC_DIR}/libft/libft.a
 
 CC			=	cc
 
@@ -17,31 +17,58 @@ FILES		=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.
 				$(addprefix mlx_utils/, init_mlx.c)											\
 				$(addprefix game/, init_game.c exit.c execute_action.c utils.c)
 
-SRCS		=	$(addprefix ${SRC_DIR}, xlam.c main.c ${FILES})
+SRCS		=	$(addprefix ${SRC_DIR}/, xlam.c main.c ${FILES})
 
 OBJS		=	${SRCS:.c=.o}
+
+OS			=	$(shell uname)
 
 .PHONY		:	re clean fclean test libft
 
 all			:	${NAME}
 
+ifeq (${OS},Darwin)
 ${NAME}		:	${LIBFT} ${OBJS}
-				${CC} ${CFLAGS} -L ./srcs/mlx -l mlx -framework OpenGL -framework AppKit ${OBJS} ${LIBFT} -o ${NAME}
+				${CC} ${CFLAGS} -L ${SRC_DIR}/mlx/mlx_macOS -l mlx -framework OpenGL -framework AppKit ${OBJS} ${LIBFT} -o ${NAME}
 
 %.o			:	%.c ${HEADER}
 				${CC} ${CFLAGS} -c $< -o $@
+else
+MLX_DIR		=	${SRC_DIR}/mlx/minilibx-linux
+
+MLX			=	${MLX_DIR}/libmlx.a
+
+%.o			:	%.c ${HEADER}
+				${CC} ${CFLAGS} -I/usr/include -I./includes -I${MLX_DIR} -c $< -o $@
+
+${NAME}		:	${LIBFT} ${MLX} ${OBJS}
+				${CC} ${CFLAGS} ${OBJS} -I./includes -I/usr/include \
+				-L${MLX_DIR} -lmlx \
+				-L/usr/lib -I${MLX_DIR} -lXext -lX11 -lm -lz \
+ 				-L./srcs/libft -lft \
+ 				-o ${NAME}
+
+${MLX}		:    mlx ;
+
+mlx			:
+				cd ${MLX_DIR} && ./configure
+endif
 
 ${LIBFT}	:	libft ;
 
 libft		:
-				${MAKE} -C ./srcs/libft
+				${MAKE} -C ${SRC_DIR}/libft
 
 clean		:
 				rm -rf ${OBJS}
-				${MAKE} -C ./srcs/libft clean
+				${MAKE} -C ${SRC_DIR}/libft clean
+				rm -rf ${SRC_DIR}/mlx/minilibx-linux/obj/*
 
 fclean		:	clean
 				rm -rf ${NAME}
-				${MAKE} -C ./srcs/libft fclean
+				${MAKE} -C ${SRC_DIR}/libft fclean
+				rm -rf ${SRC_DIR}/mlx/minilibx-linux/obj/*
+				rm -rf ${SRC_DIR}/mlx/minilibx-linux/libmlx*.a
+				rm -rf ${SRC_DIR}/mlx/minilibx-linux/Makefile.gen
 
 re			:	fclean all
