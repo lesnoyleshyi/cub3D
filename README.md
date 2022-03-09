@@ -1,5 +1,5 @@
 # cub3D is a small 3D-game that uses raycasting tecnology.
-To run it on Linux use `--recurse-submodules` option with git clone command:
+To run it on Linux use `--recurse-submodules` option with `git clone` command:
 
 `git clone --recurse-submodules https://github.com/lesnoyleshyi/cub3D.git`
 
