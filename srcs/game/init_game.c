@@ -8,10 +8,10 @@ static void extract_data_from_map(t_game *game, t_map *map)
 	game->map = map->map;
 	game->player.x = (double) map->player_x + 0.5;
 	game->player.y = (double) map->player_y + 0.5;
-	game->dir.x = 0 + (sym == SIDE_W) - (sym == SIDE_E);
-	game->dir.y = 0 + (sym == SIDE_N) - (sym == SIDE_S);
-	game->plane.x = game->dir.y * -0.66;
-	game->plane.y = game->dir.x * -0.66;
+	game->dir.x = (sym == SIDE_S) - (sym == SIDE_N);
+	game->dir.y = (sym == SIDE_W) - (sym == SIDE_E);
+	game->plane.x = game->dir.y * -0.8;
+	game->plane.y = game->dir.x * -0.8;
 }
 
 static void	init_color(t_game *game, t_data *data)

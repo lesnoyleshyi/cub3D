@@ -27,7 +27,11 @@ enum e_surface
 	E_CEILLING
 };
 
-typedef int t_bool;
+enum e_orientation
+{
+	E_HORIZONTAL = 0,
+	E_VERTICAL = 1
+};
 
 typedef struct s_color
 {
@@ -63,6 +67,12 @@ typedef struct s_coordination
 	double	y;
 }	t_coord;
 
+typedef	struct s_int_coord
+{
+	int	x;
+	int	y;
+}	t_icoord;
+
 typedef struct s_texture
 {
 	void	*img;
@@ -74,7 +84,24 @@ typedef struct s_texture
 	int		bpp;
 }	t_tex;
 
-
+typedef struct s_data_for_render
+{
+	int			tex_height;
+	int			draw_start;
+	int			draw_end;
+	int			side;
+	double		wall_x;
+	double		tex_pos;
+	double		step_len;
+	double		camera_x;
+	double		dist_to_hit;
+	t_coord		side_dist;
+	t_coord		del_dist;
+	t_coord		ray_dir;
+	t_icoord	tex;
+	t_icoord	map;
+	t_icoord	step;
+}	t_param;
 
 typedef struct s_game_data
 {
@@ -84,7 +111,8 @@ typedef struct s_game_data
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_tex	*texture;
-	t_tex	*screen;
+	t_tex	screen;
+	t_param	params;
 	t_coord	player;
 	t_coord	plane;
 	t_coord	dir;

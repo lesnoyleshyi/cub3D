@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <math.h>
 
 //   --- parser ---   //
 int		up_atoi(const char *str);
@@ -43,11 +44,7 @@ t_data	*parse(int argc, char **argv);
 
 //   --- mlx_utils ---   //
 void	init_mlx(t_game *game, t_data *data);
-int		get_pixel_color(t_tex *tex, double x0, double y0);
-void	put_pixel(t_tex *img, int x, int y, int color);
-
-//   --- game/utils.c ---   //
-double	up_abs(double n);
+void	draw_line(t_game *game, int x);
 
 //   --- game ---   //
 t_game	*init_game(t_data *data);
@@ -58,5 +55,7 @@ int		recasting(t_game *game);
 //   --- xlam.c ---   //
 void	print_string_array(char **arr);
 void	print_data(t_data *data);
+void	print(char *mes);
+void	print_param(t_param param);
 
 #endif

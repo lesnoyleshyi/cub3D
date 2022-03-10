@@ -60,8 +60,10 @@
 # define SIDE_W 'W'
 # define SIDE_E 'E'
 
-# define SCREEN_WIDTH 2048
-# define SCREEN_HEIGHT 1440
+# define SCREEN_WIDTH 1500
+# define SCREEN_HEIGHT 800
+# define TEX_WIDTH 250
+# define TEX_HEIGHT 250
 # define STEP 0.05
 
 # define KEY_A 0
