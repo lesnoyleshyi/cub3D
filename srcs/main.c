@@ -19,8 +19,9 @@ int	main(int argc, char **argv)
 
 
 	data = parse(argc, argv);
-	print_data(data);
+//	print_data(data);
 	game = init_game(data);
+
 	mlx_loop_hook(game->mlx_ptr, recasting, game);
 	mlx_hook(game->win_ptr, 2, 0, execute_action, game);
 	mlx_hook(game->win_ptr, 17, 0, exit_ok, NULL);

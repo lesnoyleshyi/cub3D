@@ -26,27 +26,24 @@ void	print_data(t_data *data)
 	printf("   --- DATA END ---   \n");
 }
 
+void	print_ray(t_ray ray)
+{
+	printf("ray.ray_pos.x = %f, ray.ray_pos.y = %f\n", ray.ray_pos.x,  ray.ray_pos.y);
+	printf("ray.camera_x = %f\n", ray.camera_x);
+	printf("ray.map_pos.x = %d, ray.map_pos.y = %d\n", ray.map_pos.x,  ray.map_pos.y);
+	printf("ray.ray_dir.x = %f, ray.ray_dir.y = %f\n", ray.ray_dir.x,  ray.ray_dir.y);
+	printf("ray.step.x = %d, ray.step.y = %d\n", ray.step.x,  ray.step.y);
+	printf("ray.delta_dist.x = %f, ray.delta_dist.y = %f\n", ray.delta_dist.x,  ray.delta_dist.y);
+	printf("ray.side_dist.x = %f, ray.side_dist.y = %f\n", ray.side_dist.x,  ray.side_dist.y);
+	printf("ray.side = %d\n", ray.side);
+	printf("ray.distance = %f\n", ray.distance);
+	printf("ray.direction = %d\n", ray.direction);
+	printf("ray.height = %d\n", ray.height);
+	printf("ray.wall_x = %f\n", ray.wall_x);
+	exit(0);
+}
+
 void	print(char *mes)
 {
 	printf("%s\n", mes);
-}
-
-void	print_param(t_param param)
-{
-	printf("--- OK --- param.camera_x = %f\n", param.camera_x);
-	printf("--- OK --- param.ray_dir x = %f y = %f\n", param.ray_dir.x, param.ray_dir.y);
-	printf("--- NORM --- param.map x = %d y = %d\n", param.map.x, param.map.y);
-	printf("--- OK --- param.del_dist x = %f y = %f\n", param.del_dist.x, param.del_dist.y);
-	printf("--- OK --- param.step x = %d y = %d\n", param.step.x, param.step.y);
-	printf("param.tex_height = %d\n", param.tex_height);
-	printf("param.draw_start = %d\n", param.draw_start);
-	printf("param.draw_end = %d\n", param.draw_end);
-	printf("param.side = %d\n", param.side);
-	printf("param.wall_x = %f\n", param.wall_x);
-	printf("param.tex_pos = %f\n", param.tex_pos);
-	printf("param.step_len = %f\n", param.step_len);
-	printf("param.dist_to_hit = %f\n", param.dist_to_hit);
-	printf("param.side_dist x = %f y = %f\n", param.side_dist.x, param.side_dist.y);
-	printf("param.tex x = %d y = %d\n", param.tex.x, param.tex.y);
-	exit(0);
 }

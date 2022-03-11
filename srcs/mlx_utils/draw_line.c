@@ -1,52 +1,37 @@
 #include "../../includes/cub.h"
 
-static int	get_pixel(t_tex *tex, int x, int y)
+void	draw_pixel(t_tex *scr, t_icoord pos, int color)
 {
-	int	*color;
-
-	color = (void *) tex->adr + (y * tex->len) + (x * tex->bpp / 8);
-	return (*color);
+	if (pos.x >= 0 && pos.y >= 0
+		&& pos.x < SCREEN_WIDTH && pos.y < SCREEN_HEIGHT)
+		*(int *)(scr->adr + (scr->len * pos.y) + (scr->bpp * pos.x / 8)) = color;
 }
 
-static void	put_pixel(t_tex *img, int x, int y, int color)
+int get_tex_color(t_tex *tex, t_icoord pos)
 {
-	char	*dst;
-
-	dst = img->adr + (y * img->len) + (x * img->bpp / 8);
-	*(int *)dst = color;
+	if (pos.x >= 0 && pos.y >= 0
+		&& pos.x < TEX_WIDTH && pos.y < TEX_HEIGHT)
+		return (*(int *) (tex->adr + (tex->len * pos.y) \
+		+ (tex->bpp * pos.x / 8)));
+	return (0x0);
 }
 
-static void put_texture_pixel(t_game *game, int x, int y)
+void	draw_line(t_game *game, t_icoord pos, int end)
 {
-	int		color;
-	t_param param;
+	int			i;
+	t_icoord	pos_pix;
 
-	param = game->params;
-	param.tex.y = (int) (param.tex_pos) & (TEX_HEIGHT - 1);
-	param.tex_pos += param.step_len;
-	if (param.side == E_HORIZONTAL && param.step.y < 0)
-		color = get_pixel(&game->texture[E_WEST], param.tex.x, param.tex.y);
-	else if (param.side == E_HORIZONTAL && param.step.y >= 0)
-		color = get_pixel(&game->texture[E_EAST], param.tex.x, param.tex.y);
-	else if (param.side == E_VERTICAL && param.step.x < 0)
-		color = get_pixel(&game->texture[E_NORTH], param.tex.x, param.tex.y);
-	else
-		color = get_pixel(&game->texture[E_SOUTH], param.tex.x, param.tex.y);
-	put_pixel(&game->screen, x, y, color);
-}
-
-void	draw_line(t_game *game, int x)
-{
-	int	y;
-
-	y = -1;
-	while (++y < SCREEN_HEIGHT)
+	i = -1;
+	pos_pix.x = pos.x;
+	while (++i < pos.y)
 	{
-		if (y < game->params.draw_start)
-			put_pixel(&game->screen, x, y, game->c_color);
-		else if (y >= game->params.draw_start && y < game->params.draw_end)
-			put_texture_pixel(game, x, y);
-		else
-			put_pixel(&game->screen, x, y, game->f_color);
+		pos_pix.y = i;
+		draw_pixel(&game->screen, pos_pix, game->c_color);
+	}
+	i = end - 1;
+	while (++i < SCREEN_HEIGHT)
+	{
+		pos_pix.y = i;
+		draw_pixel(&game->screen, pos_pix, game->f_color);
 	}
 }

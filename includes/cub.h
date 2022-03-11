@@ -13,8 +13,7 @@
 #ifndef CUB_H
 # define CUB_H
 # include "../srcs/libft/libft.h"
-//# include "../srcs/mlx/mlx_macOS/mlx.h"
-# include "../srcs/mlx/minilibx-linux/mlx.h"
+# include "../srcs/mlx/mlx_macOS/mlx.h"
 # include "constants.h"
 # include "strings.h"
 # include "structs.h"
@@ -44,7 +43,9 @@ t_data	*parse(int argc, char **argv);
 
 //   --- mlx_utils ---   //
 void	init_mlx(t_game *game, t_data *data);
-void	draw_line(t_game *game, int x);
+void	draw_line(t_game *game, t_icoord pos, int end);
+void	draw_pixel(t_tex *scr, t_icoord pos, int color);
+int 	get_tex_color(t_tex *tex, t_icoord pos);
 
 //   --- game ---   //
 t_game	*init_game(t_data *data);
@@ -56,6 +57,6 @@ int		recasting(t_game *game);
 void	print_string_array(char **arr);
 void	print_data(t_data *data);
 void	print(char *mes);
-void	print_param(t_param param);
+void	print_ray(t_ray ray);
 
 #endif

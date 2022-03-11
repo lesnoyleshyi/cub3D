@@ -35,8 +35,6 @@ static void	init_texture(t_game *game, t_data *data)
 
 void	init_mlx(t_game *game, t_data *data)
 {
-	if (data != NULL)
-		{};
 	game->mlx_ptr = mlx_init();
 	if (game->mlx_ptr == NULL)
 		put_error(INVALID_MLX_PTR, ERR_MLX);

@@ -76,7 +76,7 @@ typedef	struct s_int_coord
 typedef struct s_texture
 {
 	void	*img;
-	char	*adr;
+	void	*adr;
 	int		width;
 	int		height;
 	int 	endian;
@@ -84,24 +84,21 @@ typedef struct s_texture
 	int		bpp;
 }	t_tex;
 
-typedef struct s_data_for_render
+typedef struct s_info
 {
-	int			tex_height;
-	int			draw_start;
-	int			draw_end;
-	int			side;
-	double		wall_x;
-	double		tex_pos;
-	double		step_len;
+	t_coord		ray_pos;
 	double		camera_x;
-	double		dist_to_hit;
-	t_coord		side_dist;
-	t_coord		del_dist;
+	t_icoord	map_pos;
 	t_coord		ray_dir;
-	t_icoord	tex;
-	t_icoord	map;
 	t_icoord	step;
-}	t_param;
+	t_coord		delta_dist;
+	t_coord		side_dist;
+	int 		side;
+	double		distance;
+	int 		direction;
+	int 		height;
+	double		wall_x;
+}	t_ray;
 
 typedef struct s_game_data
 {
@@ -112,7 +109,6 @@ typedef struct s_game_data
 	void	*win_ptr;
 	t_tex	*texture;
 	t_tex	screen;
-	t_param	params;
 	t_coord	player;
 	t_coord	plane;
 	t_coord	dir;

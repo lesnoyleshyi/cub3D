@@ -12,113 +12,107 @@ static void	init_screen(t_game *game)
 			&game->screen.endian);
 }
 
-static void	init_start_data(t_game *game, int x)
+static void init_start_param(t_game *game, t_ray *ray, int x)
 {
-	t_param	*param;
-
-	param = &game->params;
-	param->camera_x = 2.0 * x / SCREEN_WIDTH - 1;
-	param->ray_dir.x = game->dir.x + game->plane.x * param->camera_x;
-	param->ray_dir.y = game->dir.y + game->plane.y * param->camera_x;
-	param->map.x = (int) game->player.x;
-	param->map.y = (int) game->player.y;
-	param->del_dist.x = fabs(1 / param->ray_dir.x);
-	param->del_dist.y = fabs(1 / param->ray_dir.y);
-//	param->del_dist.x = sqrt(1 + (param->ray_dir.y * param->ray_dir.y) \
-//	/ (param->ray_dir.x * param->ray_dir.x));
-//	param->del_dist.x = sqrt(1 + (param->ray_dir.x * param->ray_dir.x) \
-//	/ (param->ray_dir.y * param->ray_dir.y));
-	param->step.x = (param->ray_dir.x >= 0) - (param->ray_dir.x < 0);
-	param->step.y = (param->ray_dir.y >= 0) - (param->ray_dir.y < 0);
-//	if (param->ray_dir.x < 0)
-//		param->side_dist.x = (game->player.x - param->map.x) * param->del_dist.x;
-//	else
-//		param->side_dist.x = (param->map.x + 1.0 - game->player.x) * param->del_dist.x;
-//	if (param->ray_dir.y < 0)
-//		param->side_dist.y = (game->player.y - param->map.y) * param->del_dist.y;
-//	else
-//		param->side_dist.y = (param->map.y + 1.0 - game->player.y) * param->del_dist.y;
-	param->side_dist.x = (param->map.x - game->player.x + (param->step.x > 0)) \
-	* param->step.x * param->del_dist.x;
-	param->side_dist.y = (param->map.y - game->player.y + (param->step.y > 0)) \
-	* param->step.y * param->del_dist.y;
+	ray->camera_x = 2.0 * x / SCREEN_WIDTH - 1;
+	ray->ray_pos.x = game->player.x;
+	ray->ray_pos.y = game->player.y;
+	ray->map_pos.x = (int) game->player.x;
+	ray->map_pos.y = (int) game->player.y;
+	ray->ray_dir.x = game->dir.x + game->plane.x * ray->camera_x;
+	ray->ray_dir.y = game->dir.y + game->plane.y * ray->camera_x;
+	ray->step.x = (ray->ray_dir.x >= 0) - (ray->ray_dir.x < 0);
+	ray->step.y = (ray->ray_dir.y >= 0) - (ray->ray_dir.y < 0);
+	ray->delta_dist.x = fabs(1.0 / ray->ray_dir.x);
+	ray->delta_dist.y = fabs(1.0 / ray->ray_dir.y);
+	ray->side_dist.x = (ray->map_pos.x - ray->ray_pos.x + (ray->step.x >= 0)) \
+	* ray->step.x * ray->delta_dist.x;
+	ray->side_dist.y = (ray->map_pos.y - ray->ray_pos.y + (ray->step.y >= 0)) \
+	* ray->step.y * ray->delta_dist.y;
 }
 
-static void	get_hit(t_game *game)
+static void	init_other_info(t_game *game, t_ray *ray)
 {
-	t_param	*param;
+	int next_side;
 
-	param = &game->params;
 	while (TRUE)
 	{
-		if (param->side_dist.x < param->side_dist.y)
-		{
-			param->side_dist.x += param->del_dist.x;
-			param->map.x += param->step.x;
-			param->side = E_HORIZONTAL;
-		}
-		else
-		{
-			param->side_dist.y += param->side_dist.y;
-			param->map.y += param->step.y;
-			param->side = E_VERTICAL;
-		}
-		if (game->map[param->map.y][param->map.x] == BLOCK)
-			return ;
+		next_side = (ray->side_dist.x < ray->side_dist.y);
+		ray->side_dist.x += (ray->delta_dist.x * next_side);
+		ray->side_dist.y += (ray->delta_dist.y * !next_side);
+		ray->map_pos.x += (ray->step.x * next_side);
+		ray->map_pos.y += (ray->step.y * !next_side);
+		ray->side = !next_side;
+		if (game->map[ray->map_pos.y][ray->map_pos.x] == BLOCK)
+			break ;
 	}
+	if (ray->side)
+		ray->distance = fabs((ray->map_pos.y - game->player.y \
+		+ (1.0 - ray->step.y) / 2) / ray->ray_dir.y);
+	else
+		ray->distance = fabs((ray->map_pos.x - game->player.x \
+		+ (1.0 - ray->step.x) / 2) / ray->ray_dir.x);
+	if (ray->side)
+		ray->direction = E_NORTH + (ray->ray_dir.y >= 0);
+	else
+		ray->direction = E_WEST + (ray->ray_dir.x >= 0);
+	ray->height = (int) fabs(SCREEN_HEIGHT / ray->distance);
 }
 
-static void	get_limiter_draw(t_game *game)
-{
-	t_param	*param;
 
-	param = &game->params;
-	if (param->side == E_HORIZONTAL)
-		param->dist_to_hit = param->side_dist.x - param->del_dist.x;
+
+static void	init_tex_pos(t_ray *r, t_tex *tex, t_icoord *tex_pos)
+{
+	if (r->side)
+		r->wall_x = r->ray_pos.x + ((r->map_pos.y - r->ray_pos.y \
+		+ (1.0 - r->step.y) / 2) / r->ray_dir.y) * r->ray_dir.x;
 	else
-		param->dist_to_hit = param->side_dist.y - param->del_dist.y;
-	param->tex_height = (int) (SCREEN_HEIGHT / param->dist_to_hit);
-	param->draw_start = (SCREEN_HEIGHT - param->tex_height) / 2;
-	if (param->draw_start < 0)
-		param->draw_start = 0;
-	param->draw_end = (SCREEN_HEIGHT + param->tex_height) / 2;
-	if (param->draw_end >= SCREEN_HEIGHT)
-		param->draw_end = SCREEN_HEIGHT - 1;
+		r->wall_x = r->ray_dir.y + ((r->map_pos.x - r->ray_pos.x \
+		+ (1.0 - r->step.x) / 2) / r->ray_dir.x) * r->ray_dir.y;
+	r->wall_x -= floor(r->wall_x);
+	tex_pos->x = (int) (r->wall_x * tex->width);
+	if (r->side == E_HORIZONTAL && r->ray_dir.x > 0)
+		tex_pos->x = tex->width - tex_pos->x - 1;
+	if (r->side == E_VERTICAL && r->ray_dir.y < 0)
+		tex_pos->x = tex->width - tex_pos->x - 1;
 }
 
-static void	get_texture_pos(t_game *game)
+static void	draw_wall(t_game *game, t_ray *r, int x)
 {
-	t_param	*param;
+	t_tex		*tex;
+	t_icoord	pix;
+	t_icoord	tex_pos;
+	int 		tex_end;
 
-	param = &game->params;
-	if (param->side == E_HORIZONTAL)
-		param->wall_x = game->player.y + param->dist_to_hit + param->ray_dir.y;
-	else
-		param->wall_x = game->player.x + param->dist_to_hit + param->ray_dir.x;
-	param->wall_x -= floor(param->wall_x);
-	param->tex.x = (int) (param->wall_x * TEX_WIDTH);
-	if ((param->side == E_HORIZONTAL && param->ray_dir.x > 0)
-		|| (param->side == E_VERTICAL && param->ray_dir.y < 0))
-		param->tex.x = TEX_WIDTH - param->tex.x - 1;
-	param->step_len = 1.0 * TEX_HEIGHT / param->tex_height;
-	param->tex_pos = (param->draw_start \
-	- (1.0 * SCREEN_HEIGHT - param->tex_height) / 2) * param->step_len;
+	tex = &game->texture[r->direction];
+	pix.x = x;
+	pix.y = (int) ((SCREEN_HEIGHT - r->height) / 2.0 * ((SCREEN_HEIGHT - r->height) > 0));
+	tex_end = (int) ((SCREEN_HEIGHT + r->height) / 2.0);
+	if (tex_end > SCREEN_HEIGHT)
+		tex_end = SCREEN_HEIGHT;
+	draw_line(game, pix, tex_end);
+	init_tex_pos(r, tex, &tex_pos);
+	--pix.y;
+	while (++pix.y < tex_end)
+	{
+		tex_pos.y = (int) ((pix.y * 2.0 - SCREEN_HEIGHT + r->height) \
+		* ((tex->height / 2.0) / r->height));
+		draw_pixel(&game->screen, pix, get_tex_color(tex, tex_pos));
+	}
 }
 
 int	recasting(t_game *game)
 {
-	int	x;
+	int		x;
+	t_ray	ray;
 
 	init_screen(game);
 	x = -1;
 	while (++x < SCREEN_WIDTH)
 	{
-		init_start_data(game, x);
-		get_hit(game);
-		get_limiter_draw(game);
-		get_texture_pos(game);
-		print_param(game->params);
-		draw_line(game, x);
+		init_start_param(game, &ray, x);
+		init_other_info(game, &ray);
+		draw_wall(game, &ray, x);
 	}
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, \
 	game->screen.img, 0, 0);
