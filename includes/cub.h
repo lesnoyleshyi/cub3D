@@ -49,7 +49,7 @@ int 	get_tex_color(t_tex *tex, t_icoord pos);
 
 //   --- game ---   //
 t_game	*init_game(t_data *data);
-int		execute_action(int key, t_game *game);
+int		key_manager(int key, t_game *game);
 int		exit_ok(int key);
 int		recasting(t_game *game);
 

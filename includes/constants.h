@@ -64,7 +64,9 @@
 # define SCREEN_HEIGHT 800
 # define TEX_WIDTH 250
 # define TEX_HEIGHT 250
-# define STEP 0.05
+# define STEP 0.11
+# define ROT 0.05
+# define PLANE 0.612562
 
 # define KEY_A 0
 # define KEY_S 1
