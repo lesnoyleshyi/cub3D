@@ -10,8 +10,6 @@ static void extract_data_from_map(t_game *game, t_map *map)
 	game->player.y = (double) map->player_y + 0.5;
 	game->dir.x = (sym == SIDE_E) - (sym == SIDE_W);
 	game->dir.y = (sym == SIDE_S) - (sym == SIDE_N);
-//	game->plane.x = game->dir.y * -0.66;
-//	game->plane.y = game->dir.x * -0.66;
 	game->plane.x = game->dir.y * -0.612562;
 	game->plane.y = game->dir.x * -0.612562;
 }

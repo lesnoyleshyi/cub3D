@@ -67,7 +67,7 @@ static void	init_tex_pos(t_ray *r, t_tex *tex, t_icoord *tex_pos)
 		r->wall_x = r->ray_pos.x + ((r->map_pos.y - r->ray_pos.y \
 		+ (1.0 - r->step.y) / 2) / r->ray_dir.y) * r->ray_dir.x;
 	else
-		r->wall_x = r->ray_dir.y + ((r->map_pos.x - r->ray_pos.x \
+		r->wall_x = r->ray_pos.y + ((r->map_pos.x - r->ray_pos.x \
 		+ (1.0 - r->step.x) / 2) / r->ray_dir.x) * r->ray_dir.y;
 	r->wall_x -= floor(r->wall_x);
 	tex_pos->x = (int) (r->wall_x * tex->width);

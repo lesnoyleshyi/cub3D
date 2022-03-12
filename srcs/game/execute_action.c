@@ -23,9 +23,9 @@ void	move_pos2(t_game *game, int key)
 	t_coord	move_pos;
 	int 	dir;
 
-	dir = (key == KEY_A) - (key == KEY_D);
-	move_pos.x = game->dir.y * STEP * dir;
-	move_pos.y = game->dir.x * STEP * dir;
+	dir = (key == KEY_D) - (key == KEY_A);
+	move_pos.x = game->plane.x * STEP * dir;
+	move_pos.y = game->plane.y * STEP * dir;
 	if (game->map[(int) (game->player.y + move_pos.y + 0.00001)]\
 	[(int) game->player.x] == BLOCK)
 		move_pos.y = 0;
@@ -53,7 +53,6 @@ static void rotate(t_game *game, int key)
 
 int	key_manager(int key, t_game *game)
 {
-//	printf("Key - %d\n", key);
 	if (key == KEY_ESC)
 		exit_ok(key);
 	else if (key == KEY_W || key == KEY_UP || key == KEY_S || key == KEY_DOWN)
