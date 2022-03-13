@@ -61,13 +61,13 @@ typedef struct s_file_data
 	t_color	*ceilling;
 }	t_data;
 
-typedef struct s_coordination
+typedef struct s_coord
 {
 	double	x;
 	double	y;
 }	t_coord;
 
-typedef	struct s_int_coord
+typedef struct s_int_coord
 {
 	int	x;
 	int	y;
@@ -79,8 +79,8 @@ typedef struct s_texture
 	void	*adr;
 	int		width;
 	int		height;
-	int 	endian;
-	int 	len;
+	int		endian;
+	int		len;
 	int		bpp;
 }	t_tex;
 
@@ -93,10 +93,10 @@ typedef struct s_info
 	t_icoord	step;
 	t_coord		delta_dist;
 	t_coord		side_dist;
-	int 		side;
+	int			side;
 	double		distance;
-	int 		direction;
-	int 		height;
+	int			direction;
+	int			height;
 	double		wall_x;
 	t_icoord	mouse;
 }	t_ray;
@@ -105,9 +105,9 @@ typedef struct s_mini_map
 {
 	int			width;
 	int			height;
-	int 		p_color;
-	int 		e_color;
-	int 		b_color;
+	int			p_color;
+	int			e_color;
+	int			b_color;
 	t_icoord	start;
 	t_icoord	pos;
 
@@ -115,8 +115,8 @@ typedef struct s_mini_map
 
 typedef struct s_game_data
 {
-	int 		f_color;
-	int 		c_color;
+	int			f_color;
+	int			c_color;
 	char		**map;
 	void		*mlx_ptr;
 	void		*win_ptr;

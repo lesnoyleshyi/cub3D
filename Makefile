@@ -16,16 +16,16 @@ FILES	=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.c
 						convert_line_to_map.c create_data.c create_map.c get_index.c 		\
 						get_subline.c parse.c put_error.c read_file.c up_atoi.c				\
 						validation_check.c)													\
-			$(addprefix mlx_utils/, init_mlx.c draw.c draw_mini_map.c)								\
+			$(addprefix mlx_utils/, init_mlx.c draw.c draw_mini_map.c)						\
 			$(addprefix game/, init_game.c exit.c action.c recasting.c)
 
-SRCS	=	$(addprefix ${SRC_DIR}/, xlam.c main.c ${FILES})
+SRCS	=	$(addprefix ${SRC_DIR}/, main.c ${FILES})
 
 OBJS	=	${SRCS:.c=.o}
 
 OS		=	$(shell uname)
 
-.PHONY		:	re clean fclean test libft
+.PHONY		:	re clean fclean test libft bonus norm
 
 all			:	${NAME}
 
@@ -87,5 +87,11 @@ ${LIBFT}	:	libft ;
 
 libft		:
 				${MAKE} -C ${SRC_DIR}/libft
+
+bonus		:	all
+
+norm		:
+				@${MAKE} -C ${SRC_DIR}/libft norm
+				@norminette ${SRCS} ${HEADER}
 
 re			:	fclean all

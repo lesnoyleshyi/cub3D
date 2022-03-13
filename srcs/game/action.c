@@ -1,18 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/13 15:09:27 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/13 15:09:28 by drayl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
 void	move_pos(t_game *game, int key)
 {
 	t_coord	move_pos;
-	int 	dir;
+	int		dir;
 
 	dir = (key == KEY_W || key == KEY_UP) - (key == KEY_S || key == KEY_DOWN);
 	move_pos.x = game->dir.x * STEP * dir;
 	move_pos.y = game->dir.y * STEP * dir;
-	if (game->map[(int) (game->player.y + move_pos.y)]\
-	[(int) game->player.x] == BLOCK)
+	if (game->map[(int)(game->player.y + move_pos.y)] \
+	[(int)game->player.x] == BLOCK)
 		move_pos.y = 0;
-	if (game->map[(int) game->player.y]\
-	[(int) (game->player.x + move_pos.x)] == BLOCK)
+	if (game->map[(int)game->player.y] \
+	[(int)(game->player.x + move_pos.x)] == BLOCK)
 		move_pos.x = 0;
 	game->player.y += move_pos.y;
 	game->player.x += move_pos.x;
@@ -20,23 +32,23 @@ void	move_pos(t_game *game, int key)
 
 void	move_pos2(t_game *game, int key)
 {
+	int		dir;
 	t_coord	move_pos;
-	int 	dir;
 
 	dir = (key == KEY_D) - (key == KEY_A);
 	move_pos.x = game->plane.x * STEP * dir;
 	move_pos.y = game->plane.y * STEP * dir;
-	if (game->map[(int) (game->player.y + move_pos.y + 0.00001)]\
-	[(int) game->player.x] == BLOCK)
+	if (game->map[(int)(game->player.y + move_pos.y + 0.00001)] \
+	[(int)game->player.x] == BLOCK)
 		move_pos.y = 0;
-	if (game->map[(int) game->player.y]\
-	[(int) (game->player.x + move_pos.x + 0.00001) ] == BLOCK)
+	if (game->map[(int)game->player.y] \
+	[(int)(game->player.x + move_pos.x + 0.00001)] == BLOCK)
 		move_pos.x = 0;
 	game->player.y += move_pos.y;
 	game->player.x += move_pos.x;
 }
 
-static void rotate(t_game *game, int key, double speed)
+static void	rotate(t_game *game, int key, double speed)
 {
 	double	dir;
 	double	dir_buff;

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/13 15:10:28 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/13 15:10:30 by drayl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
-static void extract_data_from_map(t_game *game, t_map *map)
+static void	extract_data_from_map(t_game *game, t_map *map)
 {
 	char	sym;
 
@@ -22,10 +34,10 @@ static void extract_data_from_map(t_game *game, t_map *map)
 
 static void	init_color(t_game *game, t_data *data)
 {
-	game->c_color = (data->ceilling->r * 256 + data->ceilling->g)
-			* 256 + data->ceilling->b;
-	game->f_color = (data->floor->r * 256 + data->floor->g)
-			* 256 + data->floor->b;
+	game->c_color = (data->ceilling->r * 256 + data->ceilling->g) \
+	* 256 + data->ceilling->b;
+	game->f_color = (data->floor->r * 256 + data->floor->g) \
+	* 256 + data->floor->b;
 	game->mini_map.p_color = 0x4a0a21;
 	game->mini_map.b_color = 0x0b053d;
 	game->mini_map.e_color = 0x9990e8;

@@ -18,7 +18,7 @@ SRC 	=	ft_atoi.c			ft_bzero.c			ft_isalnum.c		\
 
 OBJ		=	${SRC:.c=.o}
 
-.PHONY	: 	all clean fclean re bonus
+.PHONY	: 	all clean fclean re bonus norm
 
 bonus	:	all
 
@@ -35,5 +35,8 @@ clean	:
 
 fclean	:	clean
 			rm -f ${NAME}
+
+norm		:
+				norminette ${SRCS} ${HEADER}
 
 re		:	fclean all

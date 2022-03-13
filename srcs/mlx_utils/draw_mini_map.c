@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_mini_map.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/13 15:08:58 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/13 15:08:59 by drayl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
 void	draw_block(t_tex *scr, int start_x, int start_y, int color)
@@ -26,7 +38,6 @@ void	draw_mini_map(t_game *game)
 	t_icoord	pix;
 
 	y = -1;
-	print_string_array(game->map);
 	while (game->map[++y] != NULL && y < game->mini_map.height)
 	{
 		x = -1;

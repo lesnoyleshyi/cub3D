@@ -49,7 +49,7 @@ void	draw_pixel(t_tex *scr, t_icoord pos, int color);
 void	draw_wall(t_game *game, t_ray *r, int x);
 void	draw_block(t_tex *scr, int start_x, int start_y, int color);
 void	draw_mini_map(t_game *game);
-int 	get_tex_color(t_tex *tex, t_icoord pos);
+int		get_tex_color(t_tex *tex, t_icoord pos);
 
 //   --- game ---   //
 t_game	*init_game(t_data *data);

@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/13 15:09:08 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/13 15:09:09 by drayl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
 static void	file_to_img(t_tex *tex, void *mlx, char *path)
 {
-	tex->img = mlx_xpm_file_to_image(mlx,path,&tex->width,&tex->height);
+	tex->img = mlx_xpm_file_to_image(mlx, path, &tex->width, &tex->height);
 	if (tex->img == NULL)
 		put_error(INVALID_INIT_IMG, ERR_INIT_IMG);
 }
 
-static void get_addr(t_tex *tex)
+static void	get_addr(t_tex *tex)
 {
 	tex->adr = mlx_get_data_addr(tex->img, &tex->bpp,
-								&tex->len, &tex->endian);
+			&tex->len, &tex->endian);
 	if (tex->adr == NULL)
 		put_error(INVALID_INIT_IMG, ERR_INIT_IMG);
 }
@@ -39,7 +51,7 @@ void	init_mlx(t_game *game, t_data *data)
 	if (game->mlx_ptr == NULL)
 		put_error(INVALID_MLX_PTR, ERR_MLX);
 	game->win_ptr = mlx_new_window(game->mlx_ptr,
-								   SCREEN_WIDTH, SCREEN_HEIGHT, NAME);
+			SCREEN_WIDTH, SCREEN_HEIGHT, NAME);
 	if (game->win_ptr == NULL)
 		put_error(INVALID_MLX_PTR, ERR_MLX);
 	init_texture(game, data);

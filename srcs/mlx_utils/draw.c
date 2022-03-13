@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/13 15:08:51 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/13 15:08:52 by drayl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
 void	draw_pixel(t_tex *scr, t_icoord pos, int color)
 {
 	if (pos.x >= 0 && pos.y >= 0
 		&& pos.x < SCREEN_WIDTH && pos.y < SCREEN_HEIGHT)
-		*(int *)(scr->adr + (scr->len * pos.y) + (scr->bpp * pos.x / 8)) = color;
+		*(int *)(scr->adr + (scr->len * pos.y) \
+		+ (scr->bpp * pos.x / 8)) = color;
 }
 
-int get_tex_color(t_tex *tex, t_icoord pos)
+int	get_tex_color(t_tex *tex, t_icoord pos)
 {
 	if (pos.x >= 0 && pos.y >= 0
 		&& pos.x < TEX_WIDTH && pos.y < TEX_HEIGHT)
-		return (*(int *) (tex->adr + (tex->len * pos.y) \
+		return (*(int *)(tex->adr + (tex->len * pos.y) \
 		+ (tex->bpp * pos.x / 8)));
 	return (0x0);
 }
@@ -49,7 +62,7 @@ static void	init_tex_pos(t_ray *r, t_tex *tex, t_icoord *tex_pos)
 		r->wall_x = r->ray_pos.y + ((r->map_pos.x - r->ray_pos.x \
 		+ (1.0 - r->step.x) / 2) / r->ray_dir.x) * r->ray_dir.y;
 	r->wall_x -= floor(r->wall_x);
-	tex_pos->x = (int) (r->wall_x * tex->width);
+	tex_pos->x = (int)(r->wall_x * tex->width);
 	if (r->side == E_HORIZONTAL && r->ray_dir.x > 0)
 		tex_pos->x = tex->width - tex_pos->x - 1;
 	if (r->side == E_VERTICAL && r->ray_dir.y < 0)
@@ -58,15 +71,16 @@ static void	init_tex_pos(t_ray *r, t_tex *tex, t_icoord *tex_pos)
 
 void	draw_wall(t_game *game, t_ray *r, int x)
 {
+	int			tex_end;
 	t_tex		*tex;
 	t_icoord	pix;
 	t_icoord	tex_pos;
-	int 		tex_end;
 
 	tex = &game->texture[r->direction];
 	pix.x = x;
-	pix.y = (int) ((SCREEN_HEIGHT - r->height) / 2.0 * ((SCREEN_HEIGHT - r->height) > 0));
-	tex_end = (int) ((SCREEN_HEIGHT + r->height) / 2.0);
+	pix.y = (int)((SCREEN_HEIGHT - r->height) \
+	/ 2.0 * ((SCREEN_HEIGHT - r->height) > 0));
+	tex_end = (int)((SCREEN_HEIGHT + r->height) / 2.0);
 	if (tex_end > SCREEN_HEIGHT)
 		tex_end = SCREEN_HEIGHT;
 	draw_line(game, pix, tex_end);
@@ -76,7 +90,7 @@ void	draw_wall(t_game *game, t_ray *r, int x)
 	{
 		if (pix.x >= game->mini_map.start.x && pix.y >= game->mini_map.start.y)
 			break ;
-		tex_pos.y = (int) ((pix.y * 2.0 - SCREEN_HEIGHT + r->height) \
+		tex_pos.y = (int)((pix.y * 2.0 - SCREEN_HEIGHT + r->height) \
 		* ((tex->height / 2.0) / r->height));
 		draw_pixel(&game->screen, pix, get_tex_color(tex, tex_pos));
 	}

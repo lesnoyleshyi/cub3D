@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   recasting.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/13 15:10:34 by drayl             #+#    #+#             */
+/*   Updated: 2022/03/13 15:10:35 by drayl            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub.h"
 
-static void init_start_param(t_game *game, t_ray *ray, int x)
+static void	init_start_param(t_game *game, t_ray *ray, int x)
 {
 	ray->camera_x = 2.0 * x / SCREEN_WIDTH - 1;
 	ray->ray_pos.x = game->player.x;
@@ -21,7 +33,7 @@ static void init_start_param(t_game *game, t_ray *ray, int x)
 
 static void	init_other_info(t_game *game, t_ray *ray)
 {
-	int next_side;
+	int	next_side;
 
 	while (TRUE)
 	{
@@ -63,7 +75,6 @@ static void	update_map(t_game *g)
 	pix.y = g->mini_map.start.y + g->mini_map.pos.y * BLOCK_SIZE;
 	draw_block(&g->screen, pix.x, pix.y, g->mini_map.p_color);
 }
-
 
 int	recasting(t_game *game)
 {
