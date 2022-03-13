@@ -36,7 +36,7 @@ void	move_pos2(t_game *game, int key)
 	game->player.x += move_pos.x;
 }
 
-static void rotate(t_game *game, int key)
+static void rotate(t_game *game, int key, double speed)
 {
 	double	dir;
 	double	dir_buff;
@@ -44,11 +44,20 @@ static void rotate(t_game *game, int key)
 
 	dir_buff = game->dir.x;
 	plane_buff = game->plane.x;
-	dir = ((key == KEY_RIGHT) - (key == KEY_LEFT)) * ROT;
+	dir = ((key == KEY_RIGHT) - (key == KEY_LEFT)) * ROT * speed;
 	game->dir.x = game->dir.x * cos(dir) - game->dir.y * sin(dir);
 	game->dir.y = dir_buff * sin(dir) + game->dir.y * cos(dir);
 	game->plane.x = game->plane.x * cos(dir) - game->plane.y * sin(dir);
 	game->plane.y = plane_buff * sin(dir) + game->plane.y * cos(dir);
+}
+
+void	rotate_for_mouse(t_game *game, t_icoord *mouse)
+{
+	if (mouse->x > game->mouse.x)
+		rotate(game, KEY_RIGHT, SMALL);
+	else
+		rotate(game, KEY_LEFT, SMALL);
+	mlx_mouse_move(game->win_ptr, game->mouse.x, game->mouse.y);
 }
 
 int	key_manager(int key, t_game *game)
@@ -60,6 +69,6 @@ int	key_manager(int key, t_game *game)
 	else if (key == KEY_D || key == KEY_A)
 		move_pos2(game, key);
 	else if (key == KEY_LEFT || key == KEY_RIGHT)
-		rotate(game, key);
+		rotate(game, key, STANDARD);
 	return (OK);
 }

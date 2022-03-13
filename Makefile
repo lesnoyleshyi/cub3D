@@ -1,38 +1,55 @@
-NAME		=	cub3D
+NAME	=	cub3D
 
-SRC_DIR		=	./srcs
+SRC_DIR	=	./srcs
 
-LIBFT		=	${SRC_DIR}/libft/libft.a
+LIBFT	=	${SRC_DIR}/libft/libft.a
 
-CC			=	cc
+MLX		=	${SRC_DIR}/mlx/libmlx.a
 
-CFLAGS		=	
+CC		=	cc
 
-HEADER		=	$(addprefix includes/, constants.h cub.h strings.h structs.h)
+CFLAGS	=	-Wall -Wextra -Werror
 
-FILES		=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.c	\
+HEADER	=	$(addprefix includes/, constants.h cub.h strings.h structs.h)
+
+FILES	=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.c		\
 						convert_line_to_map.c create_data.c create_map.c get_index.c 		\
 						get_subline.c parse.c put_error.c read_file.c up_atoi.c				\
 						validation_check.c)													\
-				$(addprefix mlx_utils/, init_mlx.c draw.c draw_mini_map.c)								\
-				$(addprefix game/, init_game.c exit.c execute_action.c recasting.c)
+			$(addprefix mlx_utils/, init_mlx.c draw.c draw_mini_map.c)								\
+			$(addprefix game/, init_game.c exit.c action.c recasting.c)
 
-SRCS		=	$(addprefix ${SRC_DIR}/, xlam.c main.c ${FILES})
+SRCS	=	$(addprefix ${SRC_DIR}/, xlam.c main.c ${FILES})
 
-OBJS		=	${SRCS:.c=.o}
+OBJS	=	${SRCS:.c=.o}
 
-OS			=	$(shell uname)
+OS		=	$(shell uname)
 
 .PHONY		:	re clean fclean test libft
 
 all			:	${NAME}
 
 ifeq (${OS},Darwin)
-${NAME}		:	${LIBFT} ${OBJS}
-				${CC} ${CFLAGS} -L ${SRC_DIR}/mlx/mlx_macOS -l mlx -framework OpenGL -framework AppKit ${OBJS} ${LIBFT} -o ${NAME}
+${NAME}		:	${LIBFT} ${OBJS} ${MLX}
+				${CC} ${CFLAGS} -framework OpenGL -framework AppKit \
+				${OBJS} ${MLX} ${LIBFT} -o ${NAME}
 
 %.o			:	%.c ${HEADER}
 				${CC} ${CFLAGS} -c $< -o $@
+
+${MLX}		:    mlx ;
+
+mlx			:
+				${MAKE} -C ${SRC_DIR}/mlx
+
+clean		:
+				rm -rf ${OBJS}
+				${MAKE} -C ${SRC_DIR}/libft clean
+				${MAKE} -C ${SRC_DIR}/mlx clean
+
+fclean		:	clean
+				rm -rf ${NAME}
+				${MAKE} -C ${SRC_DIR}/libft fclean
 else
 MLX_DIR		=	${SRC_DIR}/mlx/minilibx-linux
 
@@ -52,12 +69,6 @@ ${MLX}		:    mlx ;
 
 mlx			:
 				cd ${MLX_DIR} && ./configure
-endif
-
-${LIBFT}	:	libft ;
-
-libft		:
-				${MAKE} -C ${SRC_DIR}/libft
 
 clean		:
 				rm -rf ${OBJS}
@@ -70,5 +81,11 @@ fclean		:	clean
 				rm -rf ${SRC_DIR}/mlx/minilibx-linux/obj/*
 				rm -rf ${SRC_DIR}/mlx/minilibx-linux/libmlx*.a
 				rm -rf ${SRC_DIR}/mlx/minilibx-linux/Makefile.gen
+endif
+
+${LIBFT}	:	libft ;
+
+libft		:
+				${MAKE} -C ${SRC_DIR}/libft
 
 re			:	fclean all

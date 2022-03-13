@@ -13,7 +13,8 @@
 #ifndef CUB_H
 # define CUB_H
 # include "../srcs/libft/libft.h"
-# include "../srcs/mlx/mlx_macOS/mlx.h"
+# include "../srcs/mlx/mlx.h"
+//#include <mlx.h>
 # include "constants.h"
 # include "strings.h"
 # include "structs.h"
@@ -52,6 +53,7 @@ int 	get_tex_color(t_tex *tex, t_icoord pos);
 
 //   --- game ---   //
 t_game	*init_game(t_data *data);
+void	rotate_for_mouse(t_game *game, t_icoord *mouse);
 int		key_manager(int key, t_game *game);
 int		exit_ok(int key);
 int		recasting(t_game *game);

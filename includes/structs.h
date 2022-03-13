@@ -98,6 +98,7 @@ typedef struct s_info
 	int 		direction;
 	int 		height;
 	double		wall_x;
+	t_icoord	mouse;
 }	t_ray;
 
 typedef struct s_mini_map
@@ -114,17 +115,18 @@ typedef struct s_mini_map
 
 typedef struct s_game_data
 {
-	int 	f_color;
-	int 	c_color;
-	char	**map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_tex	*texture;
-	t_tex	screen;
-	t_mmap	mini_map;
-	t_coord	player;
-	t_coord	plane;
-	t_coord	dir;
+	int 		f_color;
+	int 		c_color;
+	char		**map;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_tex		*texture;
+	t_tex		screen;
+	t_mmap		mini_map;
+	t_coord		player;
+	t_coord		plane;
+	t_coord		dir;
+	t_icoord	mouse;
 }	t_game;
 
 #endif

@@ -47,4 +47,7 @@ void	init_mlx(t_game *game, t_data *data)
 	game->screen.img = mlx_new_image(game->mlx_ptr, \
 	SCREEN_WIDTH, SCREEN_HEIGHT);
 	get_addr(&game->screen);
+	mlx_mouse_move(game->win_ptr, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+	mlx_mouse_get_pos(game->win_ptr, &game->mouse.x, &game->mouse.y);
+	mlx_mouse_hide();
 }

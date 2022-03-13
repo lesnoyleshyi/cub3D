@@ -68,6 +68,8 @@
 # define STEP 0.11
 # define ROT 0.09
 # define PLANE 0.612562
+# define STANDARD 1.0
+# define SMALL 0.5
 
 # define KEY_A 0
 # define KEY_S 1

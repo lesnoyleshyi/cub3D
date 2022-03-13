@@ -70,6 +70,9 @@ int	recasting(t_game *game)
 	int		x;
 	t_ray	ray;
 
+	mlx_mouse_get_pos(game->win_ptr, &ray.mouse.x, &ray.mouse.y);
+	if (game->mouse.x != ray.mouse.x)
+		rotate_for_mouse(game, &ray.mouse);
 	x = -1;
 	while (++x < SCREEN_WIDTH)
 	{
