@@ -40,7 +40,7 @@ void	print_ray(t_ray ray)
 	printf("ray.direction = %d\n", ray.direction);
 	printf("ray.height = %d\n", ray.height);
 	printf("ray.wall_x = %f\n", ray.wall_x);
-	exit(0);
+//	exit(0);
 }
 
 void	print(char *mes)

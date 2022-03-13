@@ -22,10 +22,10 @@ static void	init_texture(t_game *game, t_data *data)
 	tex = (t_tex *) malloc(sizeof (t_tex) * TEXTURE_COUNT);
 	if (tex == NULL)
 		put_error(INVALID_MEMORY, ERR_MEMORY);
-	file_to_img(&(tex[E_NORTH]), game->win_ptr, data->path_north);
-	file_to_img(&(tex[E_SOUTH]), game->win_ptr, data->path_south);
-	file_to_img(&(tex[E_WEST]), game->win_ptr, data->path_west);
-	file_to_img(&(tex[E_EAST]), game->win_ptr, data->path_east);
+	file_to_img(&(tex[E_NORTH]), game->mlx_ptr, data->path_north);
+	file_to_img(&(tex[E_SOUTH]), game->mlx_ptr, data->path_south);
+	file_to_img(&(tex[E_WEST]), game->mlx_ptr, data->path_west);
+	file_to_img(&(tex[E_EAST]), game->mlx_ptr, data->path_east);
 	get_addr(&(tex[E_NORTH]));
 	get_addr(&(tex[E_SOUTH]));
 	get_addr(&(tex[E_WEST]));
@@ -43,4 +43,8 @@ void	init_mlx(t_game *game, t_data *data)
 	if (game->win_ptr == NULL)
 		put_error(INVALID_MLX_PTR, ERR_MLX);
 	init_texture(game, data);
+	mlx_clear_window(game->mlx_ptr, game->win_ptr);
+	game->screen.img = mlx_new_image(game->mlx_ptr, \
+	SCREEN_WIDTH, SCREEN_HEIGHT);
+	get_addr(&game->screen);
 }

@@ -100,6 +100,18 @@ typedef struct s_info
 	double		wall_x;
 }	t_ray;
 
+typedef struct s_mini_map
+{
+	int			width;
+	int			height;
+	int 		p_color;
+	int 		e_color;
+	int 		b_color;
+	t_icoord	start;
+	t_icoord	pos;
+
+}t_mmap;
+
 typedef struct s_game_data
 {
 	int 	f_color;
@@ -109,6 +121,7 @@ typedef struct s_game_data
 	void	*win_ptr;
 	t_tex	*texture;
 	t_tex	screen;
+	t_mmap	mini_map;
 	t_coord	player;
 	t_coord	plane;
 	t_coord	dir;
